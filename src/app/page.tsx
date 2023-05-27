@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import CustomButton from './custombutton'
 
 export default function Home() {
   return (
