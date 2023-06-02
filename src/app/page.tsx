@@ -1,42 +1,27 @@
-import Image from 'next/image'
-
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    <a
-      h1
-      size={60}
-      css={{
-        textGradient: "45deg, $blue600 -20%, $pink600 50%",
-      }}
-      weight="bold"
-    >
-      Let's
-    </a>
-    <a
-      h1
-      size={60}
-      css={{
-        textGradient: "45deg, $purple600 -20%, $pink600 100%",
-      }}
-      weight="bold"
-    >
-      Make the Web
-    </a>
-    <a
-      h1
-      size={60}
-      css={{
-        textGradient: "45deg, $yellow600 -20%, $red600 100%",
-      }}
-      weight="bold"
-      Prettier
-    </a>
-    </main>
-
-export custombutton Function{
-    <button disabled="disabled">
-
-    </button>
-
-}
+    //carousels/Bootstrap.js
+    import { useState } from "react";
+    import { items } from "../public/Items.json";
+    import { Carousel } from "react-bootstrap";
+    import "bootstrap/dist/css/bootstrap.min.css";
+    import styles from "../styles/Bootstrap.module.css";
+    export default function Home() {
+      const { bootstrap } = items;
+      const [index, setIndex] = useState(0);
+      const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+      };
+      return (
+        <Carousel activeIndex={index} onSelect={handleSelect}>
+          {bootstrap.map((item) => (
+            <Carousel.Item key={item.id} className={styles.itemP} interval={4000}>
+              <img src={item.imageUrl} alt="slides" />
+              <Carousel.Caption className={styles.caption}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                <button className="btn btn-danger">Visit Docs</button>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      );
+    }
